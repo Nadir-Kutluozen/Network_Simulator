@@ -1,0 +1,45 @@
+/* styles.css */
+
+/* Style for icons in the palette */
+.palette-icon {
+    -fx-padding: 5px;
+    -fx-border-color: lightgrey;
+    -fx-border-width: 1px;
+    -fx-border-radius: 3px;
+    -fx-background-color: white;
+}
+
+.palette-icon:hover {
+    -fx-effect: dropshadow(three-pass-box, dodgerblue, 5, 0.3, 0, 0);
+    -fx-cursor: hand; /* Already set in code, but good practice */
+}
+
+/* Basic styles for device icons on the pane (can be device-specific) */
+.pc-icon, .switch-icon, .router-icon {
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.4), 5, 0, 0, 1);
+}
+
+/* Style for the connection lines */
+.line { /* Not directly applied via class in code, but shows structure */
+    -fx-stroke: black;
+    -fx-stroke-width: 2px;
+}
+
+/* Style for the network pane itself */
+#networkPane {
+    -fx-background-color: #f0f0f0; /* Light grey background */
+    -fx-border-color: grey;
+    -fx-border-width: 1px;
+}
+
+/* Style for terminal output (using monospaced font) */
+.text-area .content { /* Target the content node within TextArea */
+    -fx-font-family: "Consolas", "Monaco", "Courier New", monospace;
+    -fx-background-color: black; /* Classic terminal look */
+    -fx-text-fill: lime;        /* Classic terminal text */
+}
+
+/* Style for the scroll-pane containing the terminal text area */
+.scroll-pane {
+    -fx-background-color: black; /* Match text area background */
+}
