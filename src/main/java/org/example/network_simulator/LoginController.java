@@ -6,7 +6,7 @@ import javafx.scene.control.Button;
 
 import java.io.IOException;
 
-public class LoginView {
+public class LoginController {
 
     @FXML
     private Button signInButton;
