@@ -13,7 +13,7 @@ public class SplashScreenController {
 
     @FXML
     void onClick(MouseEvent event) throws IOException {
-        HelloApplication.setRoot("login-view.fxml");
+        ServerApplication.setRoot("login-view.fxml");
     }
 
 }

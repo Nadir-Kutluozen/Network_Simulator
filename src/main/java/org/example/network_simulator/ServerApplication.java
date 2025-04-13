@@ -8,14 +8,14 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class HelloApplication extends Application {
+public class ServerApplication extends Application {
     private static Scene scene;
 
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("splash-screen-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(ServerApplication.class.getResource("splash-screen-view.fxml"));
         scene = new Scene(fxmlLoader.load(), 950, 600);
-        stage.setTitle("Hello!");
+        stage.setTitle("Silver Server");
         stage.setScene(scene);
         stage.show();
     }
@@ -25,7 +25,7 @@ public class HelloApplication extends Application {
     }
 
     private static Parent loadFXML(String fxml) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(fxml));
+        FXMLLoader fxmlLoader = new FXMLLoader(ServerApplication.class.getResource(fxml));
         return fxmlLoader.load();
     }
 

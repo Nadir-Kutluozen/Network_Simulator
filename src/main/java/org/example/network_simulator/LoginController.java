@@ -13,7 +13,7 @@ public class LoginController {
 
     @FXML
     void onSignInClick(ActionEvent event) throws IOException {
-        HelloApplication.setRoot("hello-view.fxml");
+        ServerApplication.setRoot("hello-view.fxml");
     }
 
 }
