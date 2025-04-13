@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.network_simulator.NetworkController">
+  <left>
+    <VBox alignment="TOP_CENTER" prefHeight="600.0" prefWidth="120.0" spacing="15.0" style="-fx-background-color: #e0e0e0; -fx-border-color: #c0c0c0; -fx-border-width: 0 1 0 0;" BorderPane.alignment="CENTER">
+      <padding>
+        <Insets bottom="10.0" left="10.0" right="10.0" top="20.0" />
+      </padding>
+      <children>
+        <Label text="Palette">
+          <font>
+            <Font name="System Bold" size="16.0" />
+          </font>
+        </Label>
+        <VBox alignment="CENTER" spacing="10.0" fx:id="palette">
+          <children>
+            <!-- Placeholder Images: Replace with your actual icons -->
+            <ImageView fx:id="pcPaletteIcon" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" styleClass="palette-icon">
+              <image>
+                <!-- Add a placeholder or real PC icon image here -->
+                <Image url="@icons/pc_icon.png" />
+              </image>
+              <userData>PC</userData>
+              <!-- Store device type in userData -->
+              <userData>
+
+              </userData>
+            </ImageView>
+            <Label text="PC" />
+
+            <ImageView fx:id="switchPaletteIcon" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" styleClass="palette-icon">
+              <image>
+                <!-- Add a placeholder or real Switch icon image here -->
+                <Image url="@icons/switch_icon.png" />
+              </image>
+              <userData>Switch</userData>
+              <userData>
+
+              </userData>
+            </ImageView>
+            <Label text="Switch" />
+
+            <ImageView fx:id="routerPaletteIcon" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" styleClass="palette-icon">
+              <image>
+                <!-- Add a placeholder or real Router icon image here -->
+                <Image url="@icons/router_icon.png" />
+              </image>
+              <userData>Router</userData>
+              <userData>
+
+              </userData>
+            </ImageView>
+            <Label text="Router" />
+          </children>
+        </VBox>
+        <Label fx:id="infoLabel" text="Drag to add. Click devices to connect." textAlignment="CENTER" wrapText="true">
+          <VBox.margin>
+            <Insets top="20.0" />
+          </VBox.margin>
+        </Label>
+      </children>
+    </VBox>
+  </left>
+  <center>
+    <!-- This Pane is the main canvas for placing devices -->
+    <AnchorPane fx:id="networkPane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #f4f4f4;" BorderPane.alignment="CENTER" />
+  </center>
+</BorderPane>
