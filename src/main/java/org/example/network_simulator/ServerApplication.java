@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Objects;
 
 public class ServerApplication extends Application {
     private static Scene scene;
@@ -19,7 +20,7 @@ public class ServerApplication extends Application {
         stage.setScene(scene);
         stage.show();
     }
-    //currently have splash screen and login screen, need to make sign up screen
+
     static void setRoot(String fxml) throws IOException {
         scene.setRoot(loadFXML(fxml));
     }

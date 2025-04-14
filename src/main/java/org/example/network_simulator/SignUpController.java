@@ -6,7 +6,7 @@ import javafx.scene.control.Button;
 
 import java.io.IOException;
 
-public class LoginController {
+public class SignUpController {
 
     @FXML
     private Button signInButton;
@@ -16,13 +16,11 @@ public class LoginController {
 
     @FXML
     void onSignInClick(ActionEvent event) throws IOException {
-        ServerApplication.setRoot("main-view.fxml");
+        ServerApplication.setRoot("login-view.fxml");
     }
 
     @FXML
     void onSignUpClick(ActionEvent event) throws IOException {
-        ServerApplication.setRoot("sign-up-view.fxml");
-
+        ServerApplication.setRoot("main-view.fxml");
     }
-
 }
