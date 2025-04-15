@@ -21,6 +21,6 @@ public class SignUpController {
 
     @FXML
     void onSignUpClick(ActionEvent event) throws IOException {
-        ServerApplication.setRoot("main-view.fxml");
+        ServerApplication.setRoot("NetworkView.fxml");
     }
 }

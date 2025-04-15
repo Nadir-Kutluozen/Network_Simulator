@@ -16,7 +16,7 @@ public class LoginController {
 
     @FXML
     void onSignInClick(ActionEvent event) throws IOException {
-        ServerApplication.setRoot("main-view.fxml");
+        ServerApplication.setRoot("NetworkView.fxml");
     }
 
     @FXML
