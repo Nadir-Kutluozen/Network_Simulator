@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Line?>
+
+<BorderPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
+  <center>
+    <Pane id="canvas" minHeight="400.0" minWidth="500.0" style="-fx-background-color: #F0F0F0;">
+      <children>
+            <ImageView fitHeight="570.0" fitWidth="500.0" pickOnBounds="true">
+               <image>
+                  <Image url="@board.png" />
+               </image>
+            </ImageView>
+        <Circle id="pc1" centerX="100.0" centerY="100.0" fill="#0000FF" radius="20.0" />
+        <Label layoutX="120.0" layoutY="90.0" text="PC1" />
+        <Line endX="200.0" endY="200.0" startX="100.0" startY="100.0" strokeWidth="2.0" />
+      </children>
+    </Pane>
+  </center>
+  <left>
+    <VBox id="sidebar" prefWidth="200.0" spacing="10.0" style="-fx-padding: 10;">
+      <children>
+        <Button id="addPcButton" text="Add PC" />
+        <Button id="viewLogsButton" text="View Logs" />
+        <Label text="Network Config" />
+        <ListView id="configList" prefHeight="150.0" />
+      </children>
+    </VBox>
+  </left>
+  <right>
+    <VBox id="terminalPane" prefWidth="250.0" spacing="10.0" style="-fx-padding: 10;">
+      <children>
+        <Label text="Terminal" />
+        <TextArea id="terminalOutput" editable="false" prefHeight="200.0" text="PC1&gt; ping PC2&#10;Pinging PC2... Success" />
+        <TextField id="commandInput" promptText="Enter command (e.g., ping)" />
+        <Button id="runButton" text="Run" />
+      </children>
+    </VBox>
+  </right>
+  <bottom>
+    <HBox id="statusBar" prefHeight="30.0" style="-fx-padding: 5;">
+      <children>
+        <Label id="statusLabel" text="Packet transfer: PC1 -&gt; PC2 (Delay: 50ms)" />
+      </children>
+    </HBox>
+  </bottom>
+</BorderPane>
