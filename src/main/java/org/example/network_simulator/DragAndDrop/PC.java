@@ -1,17 +1,18 @@
-package org.example.network_simulator;
+package org.example.network_simulator.DragAndDrop;
 
-// PC.java
+import org.example.network_simulator.NetworkDevice;
+
 import java.util.Objects;
 
 public class PC extends NetworkDevice {
 
+    private static int nextIpSuffix = 100; // Static counter to avoid duplicate IPs
     private String ipAddress;
-    private String subnetMask = "255.255.255.0"; // Default mask
+    private String subnetMask = "255.255.255.0"; // Default subnet mask
 
     public PC(double x, double y) {
         super("PC", x, y);
-        // Assign a default IP based on ID (simple scheme)
-        this.ipAddress = "192.168.1." + (100 + getId());
+        this.ipAddress = "192.168.1." + nextIpSuffix++;
     }
 
     public String getIpAddress() {
@@ -30,20 +31,22 @@ public class PC extends NetworkDevice {
         this.subnetMask = subnetMask;
     }
 
-    // Override toString for better identification (used in ping target parsing)
+    /**
+     * Returns a readable identifier, e.g., "PC1", "PC2"
+     */
     @Override
     public String toString() {
-        // Consistent identifier like "PC1", "PC2"
         return getType() + getId();
     }
 
-    // Useful for finding PCs by IP later if needed
+    /**
+     * Checks equality based on unique ID
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        PC pc = (PC) o;
-        return getId() == pc.getId(); // Assuming ID is unique
+        if (!(o instanceof PC pc)) return false;
+        return getId() == pc.getId();
     }
 
     @Override

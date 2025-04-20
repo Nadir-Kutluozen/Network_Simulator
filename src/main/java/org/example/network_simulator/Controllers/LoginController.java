@@ -1,12 +1,13 @@
-package org.example.network_simulator;
+package org.example.network_simulator.Controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import org.example.network_simulator.ServerApplication;
 
 import java.io.IOException;
 
-public class SignUpController {
+public class LoginController {
 
     @FXML
     private Button signInButton;
@@ -16,11 +17,13 @@ public class SignUpController {
 
     @FXML
     void onSignInClick(ActionEvent event) throws IOException {
-        ServerApplication.setRoot("login-view.fxml");
+        ServerApplication.setRoot("NetworkView.fxml");
     }
 
     @FXML
     void onSignUpClick(ActionEvent event) throws IOException {
-        ServerApplication.setRoot("NetworkView.fxml");
+        ServerApplication.setRoot("sign-up-view.fxml");
+
     }
+
 }

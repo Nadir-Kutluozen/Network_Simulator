@@ -7,7 +7,9 @@ public abstract class NetworkDevice {
     private static int idCounter = 0;
     private final int id;
     private final String type;
-    // JavaFX properties to allow binding with visual elements
+    private String name = "";  // Optional user-defined label
+
+    // JavaFX properties to bind position to UI
     private final DoubleProperty xPosition = new SimpleDoubleProperty();
     private final DoubleProperty yPosition = new SimpleDoubleProperty();
 
@@ -26,19 +28,45 @@ public abstract class NetworkDevice {
         return type;
     }
 
-    public double getXPosition() { return xPosition.get(); }
-    public DoubleProperty xPositionProperty() { return xPosition; }
-    public void setXPosition(double xPosition) { this.xPosition.set(xPosition); }
+    public double getXPosition() {
+        return xPosition.get();
+    }
 
-    public double getYPosition() { return yPosition.get(); }
-    public DoubleProperty yPositionProperty() { return yPosition; }
-    public void setYPosition(double yPosition) { this.yPosition.set(yPosition); }
+    public DoubleProperty xPositionProperty() {
+        return xPosition;
+    }
+
+    public void setXPosition(double xPosition) {
+        this.xPosition.set(xPosition);
+    }
+
+    public double getYPosition() {
+        return yPosition.get();
+    }
+
+    public DoubleProperty yPositionProperty() {
+        return yPosition;
+    }
+
+    public void setYPosition(double yPosition) {
+        this.yPosition.set(yPosition);
+    }
+
+    public String getName() {
+        return name.isEmpty() ? toString() : name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public static void resetIdCounter() {
+        idCounter = 0;
+    }
 
     @Override
     public String toString() {
         // Provides a consistent way to identify devices, e.g., "PC1", "Switch2"
-        return type + getId();
+        return type + id;
     }
-
-    // Could add lists for connections later
 }

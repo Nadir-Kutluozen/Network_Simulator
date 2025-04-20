@@ -1,4 +1,6 @@
-package org.example.network_simulator;
+package org.example.network_simulator.DragAndDrop;
+
+import org.example.network_simulator.NetworkDevice;
 
 public class Switch extends NetworkDevice {
     public Switch(double x, double y) {

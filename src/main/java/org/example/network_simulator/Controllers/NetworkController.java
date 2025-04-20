@@ -1,4 +1,4 @@
-package org.example.network_simulator;
+package org.example.network_simulator.Controllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -15,6 +15,10 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import org.example.network_simulator.*;
+import org.example.network_simulator.DragAndDrop.PC;
+import org.example.network_simulator.DragAndDrop.Router;
+import org.example.network_simulator.DragAndDrop.Switch;
 
 
 import java.io.IOException;
@@ -53,13 +57,13 @@ public class NetworkController {
         infoLabel.setText("Drag icons to add devices.\nClick device, then another to connect.\nDouble-click PC to open terminal.");
     }
 
-    // --- Drag and Drop from Palette ---
+    // --- Drag and Drop from Palette Code ---
 
     private void setupPaletteDrag() {
         for (Node paletteIcon : palette.getChildren()) {
             if (paletteIcon instanceof ImageView) {
                 paletteIcon.setOnDragDetected(this::handlePaletteDragDetected);
-                // Add hover effect maybe?
+                // Hover effect go Here //
                 paletteIcon.setOnMouseEntered(e -> paletteIcon.setCursor(Cursor.HAND));
                 paletteIcon.setOnMouseExited(e -> paletteIcon.setCursor(Cursor.DEFAULT));
             }
@@ -73,8 +77,6 @@ public class NetworkController {
             ClipboardContent content = new ClipboardContent();
             String deviceType = (String) sourceNode.getUserData();
             content.putString(deviceType); // Put device type identifier
-            // Optional: set drag view
-            // db.setDragView(((ImageView) sourceNode).getImage());
             db.setContent(content);
             event.consume();
             System.out.println("Drag detected: " + deviceType);
@@ -144,7 +146,6 @@ public class NetworkController {
         // Handle drag exiting the pane during a move operation
         networkPane.setOnDragExited(event -> {
             if (draggedNode != null) {
-                // Optional: reset cursor or visual feedback if needed
                 networkPane.setCursor(Cursor.DEFAULT); // Reset cursor if it was changed
             }
         });
@@ -202,12 +203,6 @@ public class NetworkController {
         if (device != null) {
             deviceIcon.setLayoutX(placeX);
             deviceIcon.setLayoutY(placeY);
-
-            // Bind visual node position to model position
-            // deviceIcon.layoutXProperty().bind(device.xPositionProperty());
-            // deviceIcon.layoutYProperty().bind(device.yPositionProperty());
-            // Direct setting might be initially less complex than pure binding for drag/drop
-            // If using binding, ensure the model updates trigger UI updates reliably.
 
             devices.add(device);
             networkPane.getChildren().add(deviceIcon);
@@ -318,7 +313,7 @@ public class NetworkController {
             firstDeviceSelected = clickedDevice;
             firstNodeSelected = clickedNode;
             isConnecting = true;
-            // Optional: Visual feedback (e.g., highlight the selected node)
+            // Handle Color for Connection //
             clickedNode.setStyle("-fx-effect: dropshadow(three-pass-box, blue, 10, 0.5, 0, 0);");
             infoLabel.setText("Connecting... Click second device.");
             System.out.println("Starting connection from: " + clickedDevice);
@@ -394,7 +389,8 @@ public class NetworkController {
 
             // Open new terminal window
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("TerminalView.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/network_simulator/terminal-view.fxml"));
+
                 Parent root = loader.load();
                 TerminalController terminalController = loader.getController();
 
@@ -422,7 +418,7 @@ public class NetworkController {
                 System.out.println("Opened terminal for " + pc);
 
             } catch (IOException e) {
-                System.err.println("Error loading TerminalView.fxml: " + e.getMessage());
+                System.err.println("Error loading terminal-view.fxml: " + e.getMessage());
                 e.printStackTrace();
             }
         }
@@ -433,7 +429,7 @@ public class NetworkController {
         if (identifier == null || identifier.trim().isEmpty()) {
             return Optional.empty();
         }
-        String targetId = identifier.trim(); //.toUpperCase(); // Make case-insensitive if desired
+        String targetId = identifier.trim();  // Make case-insensitive if desired
 
         return devices.stream()
                 .filter(dev -> {
@@ -511,7 +507,7 @@ public class NetworkController {
                 (conn.getDevice1() == sourcePc && conn.getDevice2() == targetDevice) ||
                         (conn.getDevice1() == targetDevice && conn.getDevice2() == sourcePc)
         );
-        // TODO: Enhance reachability to check via switches/routers later
+        //  Enhance reachability to check via switches/routers later
 
         // --- Simulate Ping Results ---
         String targetIp = (targetDevice instanceof PC) ? ((PC) targetDevice).getIpAddress() : targetDevice.toString(); // Use IP if PC, else ID
@@ -522,8 +518,6 @@ public class NetworkController {
             for (int i = 0; i < 4; i++) {
                 int time = (int) (Math.random() * 10) + 1; // Simulate 1-10 ms delay
                 terminal.displayOutput("Reply from " + targetIp + ": bytes=32 time=" + time + "ms TTL=128");
-                // Optional: Add a small delay visually if desired, but complicates things
-                // try { Thread.sleep(300); } catch (InterruptedException e) { Thread.currentThread().interrupt(); }
             }
             terminal.displayOutput("\nPing statistics for " + targetIp + ":");
             terminal.displayOutput("    Packets: Sent = 4, Received = 4, Lost = 0 (0% loss),");
@@ -583,11 +577,12 @@ public class NetworkController {
         }
     }
 
+    // Thing to work on:
     // --- Communication Simulation ---
 
 
     // --- Utility for removing devices (More complex - requires handling connections) ---
-    // TODO: Implement device removal (right-click context menu?)
+    // Implement device removal (right-click context menu?)
     // - Remove device from devices list
     // - Remove node from pane
     // - Remove mappings (nodeToDeviceMap, deviceToNodeMap)
