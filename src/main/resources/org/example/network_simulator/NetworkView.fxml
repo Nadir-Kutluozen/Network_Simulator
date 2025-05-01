@@ -16,7 +16,7 @@
         <Insets bottom="10.0" left="10.0" right="10.0" top="20.0" />
       </padding>
       <children>
-        <Label text="Palette">
+        <Label fx:id="userName" text="Palette">
           <font>
             <Font name="System Bold" size="16.0" />
           </font>

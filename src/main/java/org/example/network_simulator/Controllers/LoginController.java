@@ -3,7 +3,11 @@ package org.example.network_simulator.Controllers;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import org.example.network_simulator.ServerApplication;
+import org.example.network_simulator.db.DbOps;
+import org.example.network_simulator.models.Session;
+import org.example.network_simulator.models.User;
 
 import java.io.IOException;
 
@@ -16,8 +20,27 @@ public class LoginController {
     private Button signUpButton;
 
     @FXML
+    private TextField userName;
+
+    @FXML
+    private TextField passwordField;
+
+
+    @FXML
     void onSignInClick(ActionEvent event) throws IOException {
-        ServerApplication.setRoot("NetworkView.fxml");
+        String name = userName.getText().trim();
+        String password = passwordField.getText().trim();
+
+        User user = DbOps.authenticateUser(name, password);
+
+        if (user != null) {
+            Session.setUser(user);
+            ServerApplication.setRoot("NetworkView.fxml");
+        } else {
+
+            System.out.println("Login failed!");
+            //todo  - if failed , do a pop up to show the user that the sign in failed.
+        }
     }
 
     @FXML

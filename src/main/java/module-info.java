@@ -1,6 +1,7 @@
 module org.example.network_simulator {
     requires javafx.controls;
     requires javafx.fxml;
+    requires java.sql;
 
 
     opens org.example.network_simulator to javafx.fxml;

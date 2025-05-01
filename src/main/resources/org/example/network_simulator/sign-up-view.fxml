@@ -21,12 +21,12 @@
             <Image url="@Images/profile.png" />
          </image>
       </ImageView>
-      <TextField layoutX="336.0" layoutY="237.0" prefHeight="37.0" prefWidth="276.0" promptText="                         Username">
+      <TextField fx:id="usernameField" layoutX="336.0" layoutY="237.0" prefHeight="37.0" prefWidth="276.0" promptText="                         Username">
          <font>
             <Font name="IBM Plex Sans Arabic SmBld" size="16.0" />
          </font>
       </TextField>
-      <TextField layoutX="336.0" layoutY="297.0" prefHeight="37.0" prefWidth="276.0" promptText="                             Email">
+      <TextField fx:id="emailField" layoutX="336.0" layoutY="297.0" prefHeight="37.0" prefWidth="276.0" promptText="                             Email">
          <font>
             <Font name="IBM Plex Sans Arabic SmBld" size="16.0" />
          </font>
@@ -47,7 +47,7 @@
             <Font name="IBM Plex Sans Arabic SmBld" size="18.0" />
          </font>
       </Text>
-      <TextField layoutX="337.0" layoutY="356.0" prefHeight="37.0" prefWidth="276.0" promptText="                         Password">
+      <TextField fx:id="passwordField" layoutX="337.0" layoutY="356.0" prefHeight="37.0" prefWidth="276.0" promptText="                         Password">
          <font>
             <Font name="IBM Plex Sans Arabic SmBld" size="16.0" />
          </font>

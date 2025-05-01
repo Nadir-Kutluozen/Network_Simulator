@@ -7,6 +7,7 @@ import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
 import javafx.scene.layout.AnchorPane;
@@ -19,6 +20,8 @@ import org.example.network_simulator.*;
 import org.example.network_simulator.DragAndDrop.PC;
 import org.example.network_simulator.DragAndDrop.Router;
 import org.example.network_simulator.DragAndDrop.Switch;
+import org.example.network_simulator.models.Session;
+import org.example.network_simulator.models.User;
 
 
 import java.io.IOException;
@@ -48,9 +51,16 @@ public class NetworkController {
     private double dragStartX, dragStartY;
     private Node draggedNode = null;
 
+    @FXML
+    private Label userName;
 
     @FXML
     public void initialize() {
+        User currentUser = Session.getUser(); // session class is holding all the information belongs top the user
+        if (currentUser != null) {
+            // if the current user is not null, assign the username!
+            userName.setText(currentUser.getUsername());
+        }
         setupPaletteDrag();
         setupPaneDrop();
         setupPaneClick(); // For initiating connections

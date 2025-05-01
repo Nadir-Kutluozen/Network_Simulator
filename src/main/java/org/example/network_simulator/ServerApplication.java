@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import org.example.network_simulator.db.DbOps;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -31,6 +32,12 @@ public class ServerApplication extends Application {
     }
 
     public static void main(String[] args) {
+        //TODO, to launch test this!!
+        //test email:nadir
+        //test password:12345678
+        // you can also register!!
+
         launch();
+
     }
 }
