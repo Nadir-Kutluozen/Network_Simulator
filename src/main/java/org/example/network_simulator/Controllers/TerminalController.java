@@ -22,6 +22,7 @@ public class TerminalController {
         sendButton.setOnAction(event -> handleInput());
     }
 
+    //todo figure out the stored the information (x,y)
     private void handleInput() {
         String input = inputField.getText().trim();
         if (input.isEmpty()) return;
