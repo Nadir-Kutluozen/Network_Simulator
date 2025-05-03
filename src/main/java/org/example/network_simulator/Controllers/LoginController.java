@@ -22,9 +22,11 @@ public class LoginController {
     @FXML
     private TextField userName;
 
+    //todo
     @FXML
     private TextField passwordField;
 
+    //todo - Khalid , when hover, it should the information about the specific pc object
 
     @FXML
     void onSignInClick(ActionEvent event) throws IOException {
