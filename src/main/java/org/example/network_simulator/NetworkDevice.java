@@ -6,7 +6,7 @@ import javafx.beans.property.SimpleDoubleProperty;
 public abstract class NetworkDevice {
     private static int idCounter = 0;
     private final int id;
-    private final String type;
+    private final String type; // PC, Switch, Router
     private String name = "";  // Optional user-defined label
 
     // JavaFX properties to bind position to UI
