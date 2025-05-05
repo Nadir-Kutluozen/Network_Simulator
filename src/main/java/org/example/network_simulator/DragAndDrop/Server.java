@@ -1,11 +1,8 @@
 package org.example.network_simulator.DragAndDrop;
 
-import org.example.network_simulator.NetworkDevice;
-
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
-import org.example.network_simulator.DragAndDrop.PC;
 
 public class Server extends PC {
     public Server(double x, double y) {
@@ -30,7 +27,7 @@ public class Server extends PC {
                         String msg = in.readLine();
                         System.out.println(getName() + " received: " + msg);
 
-                        // Respond with something meaningful
+                        // Response
                         out.write("HTTP/1.1 200 OK");
                         out.newLine();
                         out.write("Content-Length: 0");
