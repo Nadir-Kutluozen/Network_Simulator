@@ -17,7 +17,7 @@ public class TerminalController {
 
     @FXML
     public void initialize() {
-        // Execute command on Enter key
+        // Execute command on an Enter key
         inputField.setOnAction(event -> handleInput());
         sendButton.setOnAction(event -> handleInput());
     }

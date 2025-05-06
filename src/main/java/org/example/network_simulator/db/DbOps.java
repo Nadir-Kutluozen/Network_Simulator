@@ -1,8 +1,11 @@
 package org.example.network_simulator.db;
 
+import org.example.network_simulator.DragAndDrop.PC;
+import org.example.network_simulator.NetworkDevice;
 import org.example.network_simulator.models.User;
 
 import java.sql.*;
+import java.util.List;
 
 public class DbOps {
     private static final String DB_URL = "jdbc:mysql://networksimulator.mysql.database.azure.com:3306/network_db?useSSL=true&requireSSL=true";
@@ -41,6 +44,22 @@ public class DbOps {
                 password VARCHAR(100) NOT NULL
             )
         """;
+            // this is for the device for the specific user.
+            String deviceTableSql = """  
+    CREATE TABLE IF NOT EXISTS devices (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        user_id INT NOT NULL,
+        type VARCHAR(50) NOT NULL,
+        x DOUBLE NOT NULL,
+        y DOUBLE NOT NULL,
+        ip_address VARCHAR(50),
+        port INT,
+        FOREIGN KEY (user_id) REFERENCES users(id)
+    )
+""";
+            stmt.executeUpdate(deviceTableSql);
+            System.out.println("Devices table ready.");
+
             stmt.executeUpdate(sql);
             System.out.println("User table ready.");
         } catch (SQLException e) {
@@ -52,11 +71,11 @@ public class DbOps {
     // Register a new user
 
     /**
-     *
-     * @param username
-     * @param email
-     * @param password
-     * @return
+     * save the user to the database
+     * @param username username
+     * @param email email
+     * @param password password
+     * @return ture is the save was successful
      */
     public static boolean registerUser(String username, String email, String password) {
         String sql = "INSERT INTO users (username, email, password) VALUES (?, ?, ?)";
@@ -76,6 +95,12 @@ public class DbOps {
         }
     }
 
+    /**
+     * authenticate the user by using a specific query
+     * @param username username
+     * @param passwordInput password
+     * @return Specific user object for session usage.
+     */
     public static User authenticateUser(String username, String passwordInput) {
         String sql = "SELECT * FROM users WHERE username = ? AND password = ?";
         try (
@@ -97,6 +122,58 @@ public class DbOps {
 
         return null;
     }
+
+    /**
+     * Save the current device usage to the database
+     * for the specific user.
+     * @param userId specific user
+     * @param devices have the device
+     */
+    public static void saveDevices(int userId, List<NetworkDevice> devices) {
+        String clearSql = "DELETE FROM devices WHERE user_id = ?";
+        String insertSql = "INSERT INTO devices (user_id, type, x, y, ip_address, port) VALUES (?, ?, ?, ?, ?, ?)";
+
+        try (Connection conn = DriverManager.getConnection(DB_URL, USERNAME, PASSWORD)) {
+
+            // we have to clear the old spot before we even can add a new one
+            try (PreparedStatement clearStat = conn.prepareStatement(clearSql)) {
+                clearStat.setInt(1, userId);
+                clearStat.executeUpdate();
+            }
+
+            //insert the device to the database
+            try (PreparedStatement insertStat = conn.prepareStatement(insertSql)) {
+                for (NetworkDevice device : devices) {
+                    String type = device.getType();
+                    double x = device.getXPosition();
+                    double y = device.getYPosition();
+                    String ip = null;
+                    int port = 0;
+
+                    if (device instanceof PC pc) {
+                        ip = pc.getIpAddress();
+                        port = pc.getPort();
+                    }
+
+                    insertStat.setInt(1, userId);
+                    insertStat.setString(2, type);
+                    insertStat.setDouble(3, x);
+                    insertStat.setDouble(4, y);
+                    insertStat.setString(5, ip);
+                    insertStat.setInt(6, port);
+                    insertStat.addBatch();
+                }
+
+                insertStat.executeBatch();
+            }
+
+            System.out.println("Devices saved successfully for user: " + userId);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 
 
 }

@@ -9,7 +9,6 @@ public class Connection {
     private final NetworkDevice device2;
     private final Line line;
 
-    // todo- add the pc locations to the data here, create a new model(PC) in the models
     public Connection(NetworkDevice device1, NetworkDevice device2, Line line) {
         this.device1 = device1;
         this.device2 = device2;
