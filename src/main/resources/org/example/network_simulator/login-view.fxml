@@ -34,7 +34,7 @@
             <Font name="IBM Plex Sans Arabic SmBld" size="16.0" />
          </font>
       </TextField>
-      <Button fx:id="signInButton" alignment="CENTER" contentDisplay="CENTER" layoutX="432.0" layoutY="402.0" mnemonicParsing="false" onAction="#onSignInClick" style="-fx-background-color: linear-gradient(to top, green, dodgerblue); -fx-border-radius: 100; -fx-border-image-width: 2; -fx-border-color: black; -fx-background-radius: 100;" text="Sign In">
+      <Button fx:id="signInButton" alignment="CENTER" contentDisplay="CENTER" layoutX="432.0" layoutY="358.0" mnemonicParsing="false" onAction="#onSignInClick" style="-fx-background-color: linear-gradient(to top, green, dodgerblue); -fx-border-radius: 100; -fx-border-image-width: 2; -fx-border-color: black; -fx-background-radius: 100;" text="Sign In">
          <font>
             <Font name="IBM Plex Sans Arabic SmBld" size="18.0" />
          </font>
@@ -44,7 +44,7 @@
             <Font name="IBM Plex Sans Arabic SmBld" size="18.0" />
          </font>
       </Button>
-      <Text layoutX="460.0" layoutY="369.0" strokeType="OUTSIDE" strokeWidth="0.0" text="OR">
+      <Text layoutX="460.0" layoutY="435.0" strokeType="OUTSIDE" strokeWidth="0.0" text="OR">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
