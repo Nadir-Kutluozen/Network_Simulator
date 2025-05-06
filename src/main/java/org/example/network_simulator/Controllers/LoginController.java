@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import org.example.network_simulator.ServerApplication;
 import org.example.network_simulator.db.DbOps;
@@ -25,7 +26,7 @@ public class LoginController {
 
     //todo
     @FXML
-    private TextField passwordField;
+    private PasswordField passwordField;
     //todo, add the patter regex here.
 
     //todo - Khalid , when hover, it should the information about the specific pc object

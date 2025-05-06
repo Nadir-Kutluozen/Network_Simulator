@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
@@ -29,11 +30,11 @@
             <Font name="IBM Plex Sans Arabic SmBld" size="16.0" />
          </font>
       </TextField>
-      <TextField fx:id="passwordField" alignment="CENTER" layoutX="337.0" layoutY="294.0" prefHeight="37.0" prefWidth="276.0" promptText="Password" style="-fx-background-radius: 100;">
+      <PasswordField fx:id="passwordField" alignment="CENTER" layoutX="338.0" layoutY="300.0" prefHeight="37.0" prefWidth="276.0" promptText="Password" style="-fx-background-radius: 100;">
          <font>
             <Font name="IBM Plex Sans Arabic SmBld" size="16.0" />
          </font>
-      </TextField>
+      </PasswordField>
       <Button fx:id="signInButton" alignment="CENTER" contentDisplay="CENTER" layoutX="432.0" layoutY="358.0" mnemonicParsing="false" onAction="#onSignInClick" style="-fx-background-color: linear-gradient(to top, green, dodgerblue); -fx-border-radius: 100; -fx-border-image-width: 2; -fx-border-color: black; -fx-background-radius: 100;" text="Sign In">
          <font>
             <Font name="IBM Plex Sans Arabic SmBld" size="18.0" />
