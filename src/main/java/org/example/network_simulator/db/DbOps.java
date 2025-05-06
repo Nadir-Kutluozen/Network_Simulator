@@ -76,7 +76,6 @@ public class DbOps {
         }
     }
 
-    //todo - work on the authenticateUser()
     public static User authenticateUser(String username, String passwordInput) {
         String sql = "SELECT * FROM users WHERE username = ? AND password = ?";
         try (
