@@ -16,14 +16,6 @@
             <Image url="@Images/bigdata.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="400.0" layoutY="67.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@Images/profile.png" />
-         </image>
-         <effect>
-            <DropShadow />
-         </effect>
-      </ImageView>
       <TextField fx:id="usernameField" alignment="CENTER" layoutX="336.0" layoutY="237.0" prefHeight="37.0" prefWidth="276.0" promptText="Username" style="-fx-background-radius: 100;">
          <font>
             <Font name="IBM Plex Sans Arabic SmBld" size="16.0" />
@@ -54,5 +46,13 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Text>
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="400.0" layoutY="67.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Images/profile.png" />
+         </image>
+         <effect>
+            <DropShadow offsetX="-5.0" offsetY="10.0" />
+         </effect>
+      </ImageView>
    </children>
 </AnchorPane>
