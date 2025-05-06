@@ -25,6 +25,7 @@ public class LoginController {
     //todo
     @FXML
     private TextField passwordField;
+    //todo, add the patter regex here.
 
     //todo - Khalid , when hover, it should the information about the specific pc object
 
