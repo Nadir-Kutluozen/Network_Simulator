@@ -33,8 +33,8 @@ public class ServerApplication extends Application {
 
     public static void main(String[] args) {
         //TODO, to launch test this!!
-        //test email:nadir
-        //test password:12345678
+        //test email:Nadir
+        //test password:1234567
         // you can also register!!
 
         launch();
