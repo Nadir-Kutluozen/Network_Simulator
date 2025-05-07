@@ -37,7 +37,7 @@
             <Font name="IBM Plex Sans Arabic SmBld" size="18.0" />
          </font>
       </Button>
-      <Button fx:id="signUpButton" layoutX="431.0" layoutY="392.0" mnemonicParsing="false" onAction="#onSignUpClick" style="-fx-background-color: linear-gradient(to top, green, dodgerblue); -fx-border-radius: 100; -fx-border-image-width: 2; -fx-border-color: black; -fx-background-radius: 100;" text="Sign Up">
+      <Button fx:id="signUpButton" layoutX="431.0" layoutY="391.0" mnemonicParsing="false" onAction="#onSignUpClick" style="-fx-background-color: linear-gradient(to top, green, dodgerblue); -fx-border-radius: 100; -fx-border-image-width: 2; -fx-border-color: black; -fx-background-radius: 100;" text="Sign Up">
          <font>
             <Font name="IBM Plex Sans Arabic SmBld" size="18.0" />
          </font>
