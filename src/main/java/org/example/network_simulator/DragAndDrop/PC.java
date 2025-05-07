@@ -6,6 +6,7 @@ import java.io.*;
 import java.net.*;
 
 public class PC extends NetworkDevice {
+    //private static int pcCounter = 0;
     private static int nextIpSuffix = 100;
     private static int nextPort = 6000;
 
@@ -26,6 +27,11 @@ public class PC extends NetworkDevice {
 
         startServer(); // Immediately start listening
     }
+
+    public PC(String type, double x, double y) {
+        super(type, x, y); // This passes the right type to NetworkDevice
+    }
+
 
     public int getPort() {
         return port;
@@ -135,7 +141,6 @@ public class PC extends NetworkDevice {
         return subnetMask;
     }
 
-    // to save them into the database
     public void setIpAddress(String ipAddress) {
         this.ipAddress = ipAddress;
     }
@@ -144,7 +149,4 @@ public class PC extends NetworkDevice {
         this.port = port;
     }
 
-
-
-    // Existing getters, setters, equals, hashCode, etc.
 }

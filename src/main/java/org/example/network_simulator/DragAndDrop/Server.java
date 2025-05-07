@@ -5,15 +5,18 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 public class Server extends PC {
+    private static int serverCounter = 0;
+
     public Server(double x, double y) {
-        super(x, y);
-        setName("Server" + getId()); // Override name
+        super("Server", x, y);
+        serverCounter++;
+        setName("Server" + serverCounter);
     }
+
 
     @Override
     public void startServer() {
         if (getServerSocket() != null && !getServerSocket().isClosed()) return;
-
         try {
             ServerSocket socket = new ServerSocket(getPort());
             System.out.println(getName() + " (Server) listening on port " + getPort());

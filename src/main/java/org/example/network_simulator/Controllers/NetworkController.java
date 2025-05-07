@@ -103,21 +103,28 @@ public class NetworkController {
 
     @FXML
     void clearConnections(ActionEvent event) {
-        // Unbind and remove all connection lines from the pane
+        // 1. Remove all connection lines
         for (Connection connection : connections) {
-            connection.unbind(); // Detach property bindings
-            networkPane.getChildren().remove(connection.getLine()); // Remove visual line
+            connection.unbind(); // Detach bindings
+            networkPane.getChildren().remove(connection.getLine());
         }
-
-        // Clear the connection list
         connections.clear();
 
-        // Reset UI hints/state if needed
-        infoLabel.setText("All connections cleared.");
+        // 2. Remove all icons
+        networkPane.getChildren().removeIf(node -> node instanceof ImageView);
+
+        // 3. Clear the device list
+        devices.clear();
+
+        // 4. Reset connection-related state
         isConnecting = false;
         firstDeviceSelected = null;
         firstNodeSelected = null;
+
+        // 5. Update info label
+        infoLabel.setText("All devices and connections cleared.");
     }
+
 
 
     private void setupPaletteDrag() {
