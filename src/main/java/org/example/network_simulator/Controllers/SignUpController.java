@@ -39,7 +39,7 @@ public class SignUpController {
         String email = emailField.getText().trim();
         String password = passwordField.getText().trim();
 
-        boolean success = DbOps.registerUser(username, email, password); // sign up the user!!
+        boolean success = DbOps.registerUser(username, email, password); //sign up the user!!
 
         if (success) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
