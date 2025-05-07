@@ -43,3 +43,62 @@
 .scroll-pane {
     -fx-background-color: black; /* Match text area background */
 }
+
+// Here is the media CSS
+/* Make the whole TableView background transparent */
+.table-view {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+/* Make headers modern & flat */
+.table-view .column-header-background {
+    -fx-background-color: #2c2c2c; /* Dark shade, or transparent */
+    -fx-border-color: transparent;
+}
+
+/* Header text */
+.table-view .column-header .label {
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+}
+
+/* Table rows (cells) */
+.table-view .table-row-cell {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-text-fill: white;
+}
+
+/* Row hover effect */
+.table-view .table-row-cell:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Selected row */
+.table-view .table-row-cell:filled:selected {
+    -fx-background-color: #3a3a3a;
+}
+
+/* Cell text */
+.table-view .table-cell {
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-alignment: CENTER_LEFT;
+}
+
+/* Scrollbar tweaks */
+.table-view .scroll-bar:vertical,
+.table-view .scroll-bar:horizontal {
+    -fx-background-color: transparent;
+}
+
+.table-view .scroll-bar .thumb {
+    -fx-background-color: #666666;
+    -fx-background-radius: 5px;
+}
+
+.table-view .scroll-bar .track {
+    -fx-background-color: transparent;
+}
