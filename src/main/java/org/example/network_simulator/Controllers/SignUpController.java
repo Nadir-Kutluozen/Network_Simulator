@@ -43,7 +43,7 @@ public class SignUpController {
 
         if (success) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Registration Successful");
+            alert.setTitle("Registration Successful!");
             alert.setHeaderText(null);
             alert.setContentText("You can now log in.");
             alert.showAndWait();
