@@ -2,53 +2,54 @@ package org.example.network_simulator.Controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.PasswordField;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
-import java.io.IOException;
-
-// Import your real classes here
+import org.example.network_simulator.ServerApplication;
 import org.example.network_simulator.db.DbOps;
 import org.example.network_simulator.models.Session;
 import org.example.network_simulator.models.User;
 
+import java.io.IOException;
+
 public class LoginController {
 
     @FXML
-    private TextField usernameField;
+    private Button signInButton;
 
     @FXML
-    private PasswordField passwordField;
+    private Button signUpButton;
 
     @FXML
-    protected void handleLogin(ActionEvent event) throws IOException {
-        String name = usernameField.getText().trim();
+    private TextField userName;
+
+    //todo
+    @FXML
+    private TextField passwordField;
+    //todo, add the patter regex here.
+
+    //todo - Khalid , when hover, it should the information about the specific pc object
+
+    @FXML
+    void onSignInClick(ActionEvent event) throws IOException {
+        String name = userName.getText().trim();
         String password = passwordField.getText().trim();
 
         User user = DbOps.authenticateUser(name, password);
 
         if (user != null) {
             Session.setUser(user);
-            switchScene(event, "NetworkView.fxml");
+            ServerApplication.setRoot("NetworkView.fxml");
         } else {
+
             System.out.println("Login failed!");
-            // TODO: Show a popup/alert to the user instead of console
+            //todo  - if failed , do a pop up to show the user that the sign in failed.
         }
     }
 
     @FXML
-    protected void switchToRegister(ActionEvent event) throws IOException {
-        switchScene(event, "sign-up-view.fxml");
+    void onSignUpClick(ActionEvent event) throws IOException {
+        ServerApplication.setRoot("sign-up-view.fxml");
+
     }
 
-    private void switchScene(ActionEvent event, String fxmlFile) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/network_simulator/" + fxmlFile));
-        Parent root = loader.load();
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setScene(new Scene(root));
-    }
 }

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -22,22 +21,22 @@
             <Image url="@Images/profile.png" />
          </image>
       </ImageView>
-      <TextField fx:id="usernameField" layoutX="336.0" layoutY="237.0" prefHeight="37.0" prefWidth="276.0" promptText="                         Username">
+      <TextField fx:id="userName" layoutX="336.0" layoutY="237.0" prefHeight="37.0" prefWidth="276.0" promptText="                         Username">
          <font>
             <Font name="IBM Plex Sans Arabic SmBld" size="16.0" />
          </font>
       </TextField>
-      <PasswordField fx:id="passwordField" layoutX="336.0" layoutY="307.0" prefHeight="37.0" prefWidth="276.0" promptText="                         Password">
+      <TextField fx:id="passwordField" layoutX="336.0" layoutY="307.0" prefHeight="37.0" prefWidth="276.0" promptText="                         Password">
          <font>
             <Font name="IBM Plex Sans Arabic SmBld" size="16.0" />
          </font>
-      </PasswordField>
-      <Button fx:id="signInButton" layoutX="433.0" layoutY="374.0" mnemonicParsing="false" onAction="#handleLogin" text="Sign In">
+      </TextField>
+      <Button fx:id="signInButton" layoutX="433.0" layoutY="374.0" mnemonicParsing="false" onAction="#onSignInClick" text="Sign In">
          <font>
             <Font name="IBM Plex Sans Arabic SmBld" size="18.0" />
          </font>
       </Button>
-      <Button fx:id="signUpButton" layoutX="430.0" layoutY="448.0" mnemonicParsing="false" onAction="#switchToRegister" text="Sign Up">
+      <Button fx:id="signUpButton" layoutX="430.0" layoutY="448.0" mnemonicParsing="false" onAction="#onSignUpClick" text="Sign Up">
          <font>
             <Font name="IBM Plex Sans Arabic SmBld" size="18.0" />
          </font>
