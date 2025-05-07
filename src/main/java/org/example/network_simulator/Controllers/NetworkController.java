@@ -19,6 +19,8 @@ import javafx.stage.Stage;
 import org.example.network_simulator.Connection;
 import org.example.network_simulator.DragAndDrop.PC;
 import org.example.network_simulator.NetworkDevice;
+import org.example.network_simulator.db.DbOps;
+import org.example.network_simulator.models.Device;
 import org.example.network_simulator.models.Session;
 import org.example.network_simulator.models.User;
 import org.example.network_simulator.NetworkUtils;
@@ -42,6 +44,51 @@ public class NetworkController {
     private NetworkDevice firstDeviceSelected = null;
     private Node firstNodeSelected = null;
 
+    //before reinitializing, we have to create a method to load all the devices from the saved user
+    private void loadSavedDevices() {
+        User currentUser = Session.getUser();
+        if (currentUser != null) {
+            List<Device> loadedDevices = DbOps.loadDevices(currentUser.getId());
+
+            for (Device device : loadedDevices) {
+                // Recreate your devices based on type
+                NetworkDevice newDevice;
+                if ("PC".equalsIgnoreCase(device.getType())) {
+                    PC pc = new PC(device.getX(), device.getY());
+
+                    // Set the saved IP & Port
+                    pc.setIpAddress(device.getIpAddress());
+                    pc.setPort(device.getPort());
+
+                    newDevice = pc;
+                } else {
+                    newDevice = NetworkUtils.createDevice(device.getType(), device.getX(), device.getY());
+                }
+                addDeviceToPane(newDevice.getType(), newDevice.getXPosition(), newDevice.getYPosition());
+
+                addDevice(newDevice);
+            }
+
+            infoLabel.setText("Loaded saved devices for " + currentUser.getUsername());
+        }
+    }
+
+    @FXML
+    private Button saveButton;
+
+    @FXML
+    void onSaveClick(ActionEvent event) {
+        User currentUser = Session.getUser();
+        if (currentUser != null) {
+            DbOps.saveDevices(currentUser.getId(), devices);  // Save all current devices
+            infoLabel.setText("Network saved to database!");
+        } else {
+            infoLabel.setText("No user session found!");
+        }
+    }
+
+
+
     @FXML
     public void initialize() {
         User currentUser = Session.getUser();
@@ -51,6 +98,7 @@ public class NetworkController {
         setupPaletteDrag();
         setupPaneDrop();
         infoLabel.setText("Drag to add. Click devices to connect.");
+        loadSavedDevices();
     }
 
     @FXML

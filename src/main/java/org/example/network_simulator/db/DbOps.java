@@ -2,9 +2,11 @@ package org.example.network_simulator.db;
 
 import org.example.network_simulator.DragAndDrop.PC;
 import org.example.network_simulator.NetworkDevice;
+import org.example.network_simulator.models.Device;
 import org.example.network_simulator.models.User;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class DbOps {
@@ -37,34 +39,36 @@ public class DbOps {
                 Statement stmt = conn.createStatement()
         ) {
             String sql = """
-            CREATE TABLE IF NOT EXISTS users (
-                id INT AUTO_INCREMENT PRIMARY KEY,
-                username VARCHAR(100) NOT NULL,
-                email VARCHAR(200) NOT NULL UNIQUE,
-                password VARCHAR(100) NOT NULL
-            )
-        """;
-            // this is for the device for the specific user.
-            String deviceTableSql = """  
-    CREATE TABLE IF NOT EXISTS devices (
-        id INT AUTO_INCREMENT PRIMARY KEY,
-        user_id INT NOT NULL,
-        type VARCHAR(50) NOT NULL,
-        x DOUBLE NOT NULL,
-        y DOUBLE NOT NULL,
-        ip_address VARCHAR(50),
-        port INT,
-        FOREIGN KEY (user_id) REFERENCES users(id)
-    )
-""";
-            stmt.executeUpdate(deviceTableSql);
-            System.out.println("Devices table ready.");
+        CREATE TABLE IF NOT EXISTS users (
+            id INT AUTO_INCREMENT PRIMARY KEY,
+            username VARCHAR(100) NOT NULL,
+            email VARCHAR(200) NOT NULL UNIQUE,
+            password VARCHAR(100) NOT NULL
+        )
+    """;
+
+            String deviceTableSql = """
+        CREATE TABLE IF NOT EXISTS devices (
+            id INT AUTO_INCREMENT PRIMARY KEY,
+            user_id INT NOT NULL,
+            type VARCHAR(50) NOT NULL,
+            x DOUBLE NOT NULL,
+            y DOUBLE NOT NULL,
+            ip_address VARCHAR(50),
+            port INT,
+            FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+        )
+    """;
 
             stmt.executeUpdate(sql);
             System.out.println("User table ready.");
+
+            stmt.executeUpdate(deviceTableSql);
+            System.out.println("Devices table ready.");
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
     }
 
 
@@ -172,6 +176,37 @@ public class DbOps {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+
+    public static List<Device> loadDevices(int userId) {
+        List<Device> devices = new ArrayList<>();
+
+        String sql = "SELECT * FROM devices WHERE user_id = ?";
+
+        try (Connection conn = DriverManager.getConnection(DB_URL, USERNAME, PASSWORD);
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setInt(1, userId);
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String type = rs.getString("type");
+                double x = rs.getDouble("x");
+                double y = rs.getDouble("y");
+                String ip = rs.getString("ip_address");
+                int port = rs.getInt("port");
+
+                Device device = new Device(id, userId, type, x, y, ip, port);
+                devices.add(device);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return devices;
     }
 
 

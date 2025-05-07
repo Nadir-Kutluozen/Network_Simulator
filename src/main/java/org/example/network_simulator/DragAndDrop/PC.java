@@ -135,6 +135,16 @@ public class PC extends NetworkDevice {
         return subnetMask;
     }
 
+    // to save them into the database
+    public void setIpAddress(String ipAddress) {
+        this.ipAddress = ipAddress;
+    }
+
+    public void setPort(int port) {
+        this.port = port;
+    }
+
+
 
     // Existing getters, setters, equals, hashCode, etc.
 }

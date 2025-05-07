@@ -1,0 +1,31 @@
+[33mc8f15fe[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mfeatures/database[m[33m, [m[1;31morigin/features/database[m[33m)[m HEAD@{0}: checkout: moving from features/database to features/database
+[33mc8f15fe[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mfeatures/database[m[33m, [m[1;31morigin/features/database[m[33m)[m HEAD@{1}: branch: Reset to origin/features/database
+[33mc8f15fe[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mfeatures/database[m[33m, [m[1;31morigin/features/database[m[33m)[m HEAD@{2}: checkout: moving from features/UI to features/database
+[33ma3da9d5[m[33m ([m[1;31morigin/features/UI[m[33m, [m[1;32mfeatures/UI[m[33m)[m HEAD@{3}: checkout: moving from features/database to features/UI
+[33mc8f15fe[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mfeatures/database[m[33m, [m[1;31morigin/features/database[m[33m)[m HEAD@{4}: checkout: moving from features/UI to features/database
+[33ma3da9d5[m[33m ([m[1;31morigin/features/UI[m[33m, [m[1;32mfeatures/UI[m[33m)[m HEAD@{5}: checkout: moving from features/UI to features/UI
+[33ma3da9d5[m[33m ([m[1;31morigin/features/UI[m[33m, [m[1;32mfeatures/UI[m[33m)[m HEAD@{6}: branch: Reset to origin/features/UI
+[33ma3da9d5[m[33m ([m[1;31morigin/features/UI[m[33m, [m[1;32mfeatures/UI[m[33m)[m HEAD@{7}: merge origin/features/UI: Fast-forward
+[33mde3bf88[m HEAD@{8}: checkout: moving from features/database to features/UI
+[33mc8f15fe[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mfeatures/database[m[33m, [m[1;31morigin/features/database[m[33m)[m HEAD@{9}: checkout: moving from features/UI to features/database
+[33mde3bf88[m HEAD@{10}: checkout: moving from features/database to features/UI
+[33mc8f15fe[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mfeatures/database[m[33m, [m[1;31morigin/features/database[m[33m)[m HEAD@{11}: commit: now user can save their specific device!
+[33m21679ca[m HEAD@{12}: commit: added a Device class to create the model!
+[33m9b3eff7[m HEAD@{13}: pull origin features/database: Fast-forward
+[33m20e7024[m HEAD@{14}: commit: added a todo for pc database save!
+[33m4f5dc25[m[33m ([m[1;31morigin/dev[m[33m, [m[1;32mdev[m[33m)[m HEAD@{15}: checkout: moving from features/UI to features/database
+[33mde3bf88[m HEAD@{16}: commit: added todos in ProfilePick class, also profile-pick layout
+[33m4f5dc25[m[33m ([m[1;31morigin/dev[m[33m, [m[1;32mdev[m[33m)[m HEAD@{17}: checkout: moving from features/database to features/UI
+[33m4f5dc25[m[33m ([m[1;31morigin/dev[m[33m, [m[1;32mdev[m[33m)[m HEAD@{18}: checkout: moving from features/UI to features/database
+[33m4f5dc25[m[33m ([m[1;31morigin/dev[m[33m, [m[1;32mdev[m[33m)[m HEAD@{19}: merge dev: Fast-forward
+[33m03f2a3d[m[33m ([m[1;31morigin/master[m[33m)[m HEAD@{20}: checkout: moving from dev to features/UI
+[33m4f5dc25[m[33m ([m[1;31morigin/dev[m[33m, [m[1;32mdev[m[33m)[m HEAD@{21}: merge features/database: Fast-forward
+[33m03f2a3d[m[33m ([m[1;31morigin/master[m[33m)[m HEAD@{22}: checkout: moving from features/database to dev
+[33m4f5dc25[m[33m ([m[1;31morigin/dev[m[33m, [m[1;32mdev[m[33m)[m HEAD@{23}: commit: added todos and comments, also cleaned the code.
+[33m7e11fd0[m HEAD@{24}: commit: Implement full login/register system with session and user model
+[33m6ea0cbc[m HEAD@{25}: commit: Working on the backend
+[33mce1925c[m HEAD@{26}: checkout: moving from master to features/database
+[33mf5f9d2e[m[33m ([m[1;32mmaster[m[33m)[m HEAD@{27}: reset: moving to HEAD
+[33mf5f9d2e[m[33m ([m[1;32mmaster[m[33m)[m HEAD@{28}: checkout: moving from master to master
+[33mf5f9d2e[m[33m ([m[1;32mmaster[m[33m)[m HEAD@{29}: branch: Reset to origin/master
+[33mf5f9d2e[m[33m ([m[1;32mmaster[m[33m)[m HEAD@{30}: commit (initial): First initial commit

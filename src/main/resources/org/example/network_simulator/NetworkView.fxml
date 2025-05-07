@@ -1,18 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SplitMenuButton?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.network_simulator.Controllers.NetworkController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.network_simulator.Controllers.NetworkController">
   <left>
-    <VBox alignment="TOP_CENTER" prefHeight="600.0" prefWidth="137.0" spacing="15.0" style="-fx-background-color: #e0e0e0; -fx-border-color: #c0c0c0; -fx-border-width: 0 1 0 0;" BorderPane.alignment="CENTER">
+    <VBox alignment="TOP_CENTER" prefHeight="600.0" prefWidth="137.0" spacing="15.0" style="-fx-background-color: white; -fx-border-color: #c0c0c0; -fx-border-width: 0 1 0 0;" BorderPane.alignment="CENTER">
       <padding>
         <Insets bottom="10.0" left="10.0" right="10.0" top="20.0" />
       </padding>
@@ -35,6 +40,9 @@
               <userData>
 
               </userData>
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
             </ImageView>
             <Label text="PC" />
 
@@ -47,6 +55,9 @@
               <userData>
 
               </userData>
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
             </ImageView>
             <Label text="Switch" />
 
@@ -59,21 +70,69 @@
               <userData>
 
               </userData>
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
             </ImageView>
             <Label text="Server" />
           </children>
         </VBox>
-            <Button fx:id="clearBtn" mnemonicParsing="false" onAction="#clearConnections" text="Clear Connection" />
+            <Button fx:id="clearBtn" minHeight="30.0" minWidth="120.0" mnemonicParsing="false" onAction="#clearConnections" style="-fx-background-color: white; -fx-border-image-width: 2; -fx-border-color: black; -fx-border-radius: 25;" text="Clear Connection">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin></Button>
         <Label fx:id="infoLabel" text="Drag to add. Click devices to connect." textAlignment="CENTER" wrapText="true">
           <VBox.margin>
             <Insets top="20.0" />
           </VBox.margin>
+               <font>
+                  <Font name="Arial" size="12.0" />
+               </font>
         </Label>
+            <Button fx:id="saveButton" minHeight="30.0" minWidth="120.0" mnemonicParsing="false" onAction="#onSaveClick" style="-fx-background-color: white; -fx-border-color: black; -fx-border-radius: 25;" text="Save">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </Button>
       </children>
+         <effect>
+            <DropShadow offsetX="1.0" offsetY="1.0">
+               <color>
+                  <Color red="0.4842105209827423" green="0.4842105209827423" blue="0.4842105209827423" />
+               </color>
+            </DropShadow>
+         </effect>
     </VBox>
   </left>
   <center>
     <!-- This Pane is the main canvas for placing devices -->
-    <AnchorPane fx:id="networkPane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #f4f4f4;" BorderPane.alignment="CENTER" />
+    <AnchorPane fx:id="networkPane" blendMode="MULTIPLY" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: linear-gradient(to top, #16fab3, #ccfcee);" BorderPane.alignment="CENTER">
+         <cursor>
+            <Cursor fx:constant="OPEN_HAND" />
+         </cursor>
+         <children>
+            <SplitMenuButton layoutX="512.0" layoutY="37.0" mnemonicParsing="false" style="-fx-background-color: none; -fx-border-color: black;" text="options" textAlignment="CENTER">
+              <items>
+                <MenuItem mnemonicParsing="false" text="Action 1" />
+                <MenuItem mnemonicParsing="false" text="Action 2" />
+              </items>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <effect>
+                  <DropShadow>
+                     <color>
+                        <Color red="0.5263158082962036" green="0.5263158082962036" blue="0.5263158082962036" />
+                     </color>
+                  </DropShadow>
+               </effect>
+            </SplitMenuButton>
+         </children></AnchorPane>
   </center>
 </BorderPane>

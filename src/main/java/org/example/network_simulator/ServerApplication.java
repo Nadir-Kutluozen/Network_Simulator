@@ -36,6 +36,8 @@ public class ServerApplication extends Application {
         //test email:nadir
         //test password:12345678
         // you can also register!!
+        DbOps dbOps = new DbOps();
+        dbOps.initializeDatabase();
 
         launch();
 
