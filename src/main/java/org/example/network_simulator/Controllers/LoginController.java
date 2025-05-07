@@ -2,6 +2,7 @@ package org.example.network_simulator.Controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import org.example.network_simulator.ServerApplication;
@@ -25,6 +26,7 @@ public class LoginController {
     //todo
     @FXML
     private TextField passwordField;
+    //todo, add the patter regex here.
 
     //todo - Khalid , when hover, it should the information about the specific pc object
 
@@ -39,9 +41,11 @@ public class LoginController {
             Session.setUser(user);
             ServerApplication.setRoot("NetworkView.fxml");
         } else {
-
-            System.out.println("Login failed!");
-            //todo  - if failed , do a pop up to show the user that the sign in failed.
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Login Failed");
+            alert.setHeaderText(null);
+            alert.setContentText("Incorrect username or password. Please try again.");
+            alert.showAndWait();
         }
     }
 
