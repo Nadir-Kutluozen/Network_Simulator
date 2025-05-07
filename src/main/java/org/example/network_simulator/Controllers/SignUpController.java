@@ -2,6 +2,7 @@ package org.example.network_simulator.Controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import org.example.network_simulator.ServerApplication;
 import org.example.network_simulator.db.DbOps;
@@ -21,6 +22,11 @@ public class SignUpController {
     @FXML
     void onSignInClick(ActionEvent event) throws IOException {
         ServerApplication.setRoot("login-view.fxml");
+    }
+
+    public void initialize() {
+        dobField.setStyle("-fx-font-family: 'IBM Plex Sans Arabic SmBld'; -fx-font-size: 16px;");
+        dobField.getEditor().setAlignment(Pos.CENTER);
     }
 
     @FXML
