@@ -42,11 +42,12 @@ public class LoginController {
 
     @FXML
     protected void switchToRegister(ActionEvent event) throws IOException {
-        switchScene(event, "register-view.fxml");
+        switchScene(event, "sign-up-view.fxml");
     }
 
     private void switchScene(ActionEvent event, String fxmlFile) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource(fxmlFile));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/network_simulator/" + fxmlFile));
+        Parent root = loader.load();
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(new Scene(root));
     }
