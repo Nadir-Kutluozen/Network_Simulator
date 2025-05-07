@@ -28,6 +28,7 @@ public class DbOps {
         ) {
             serverStmt.executeUpdate("CREATE DATABASE IF NOT EXISTS network_db");
             System.out.println("Database 'network_db' checked/created.");
+
         } catch (SQLException e) {
             e.printStackTrace();
             return;
@@ -39,14 +40,14 @@ public class DbOps {
                 Statement stmt = conn.createStatement()
         ) {
             String sql = """
-        CREATE TABLE IF NOT EXISTS users (
-            id INT AUTO_INCREMENT PRIMARY KEY,
-            username VARCHAR(100) NOT NULL,
-            email VARCHAR(200) NOT NULL UNIQUE,
-            password VARCHAR(100) NOT NULL
-        )
-    """;
-
+    CREATE TABLE IF NOT EXISTS users (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        username VARCHAR(100) NOT NULL,
+        email VARCHAR(200) NOT NULL UNIQUE,
+        password VARCHAR(100) NOT NULL,
+        profile_pic LONGBLOB
+    )
+""";
             String deviceTableSql = """
         CREATE TABLE IF NOT EXISTS devices (
             id INT AUTO_INCREMENT PRIMARY KEY,
@@ -70,6 +71,7 @@ public class DbOps {
         }
 
     }
+
 
 
     // Register a new user
@@ -100,7 +102,36 @@ public class DbOps {
     }
 
     /**
-     * authenticate the user by using a specific query
+     * Update the profile picture for a specific user by their ID.
+     *
+     * @param id         The user's ID.
+     * @param profilePic The profile picture as a byte array.
+     * @return true if update is successful; false otherwise.
+     */
+    public static boolean updateProfilePic(int id, byte[] profilePic) {
+        String sql = "UPDATE users SET profile_pic = ? WHERE id = ?";
+        try (
+                Connection conn = DriverManager.getConnection(DB_URL, USERNAME, PASSWORD);
+                PreparedStatement stmt = conn.prepareStatement(sql)
+        ) {
+            stmt.setBytes(1, profilePic);
+            stmt.setInt(2, id);
+
+            int rowsAffected = stmt.executeUpdate();
+            return rowsAffected > 0;
+
+        } catch (SQLException e) {
+            System.err.println("Failed to update profile picture by ID: " + e.getMessage());
+            return false;
+        }
+    }
+
+
+
+
+    /**
+     * Authenticate the user by using a specific query.
+     *
      * @param username username
      * @param passwordInput password
      * @return Specific user object for session usage.
@@ -113,12 +144,18 @@ public class DbOps {
         ) {
             prepStat.setString(1, username);
             prepStat.setString(2, passwordInput);
-
             ResultSet rs = prepStat.executeQuery();
             if (rs.next()) {
                 int id = rs.getInt("id");
                 String email = rs.getString("email");
-                return new User(id, username, email); // new user object created for the session
+                byte[] profilePic = rs.getBytes("profile_pic"); // to set the profile pick
+
+                // Create the User object
+                User user = new User(id, username, email,profilePic);
+
+                // Set the profile pic
+                user.setProfilePic(profilePic);
+                return user;
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -170,7 +207,6 @@ public class DbOps {
 
                 insertStat.executeBatch();
             }
-
             System.out.println("Devices saved successfully for user: " + userId);
 
         } catch (SQLException e) {
@@ -181,9 +217,7 @@ public class DbOps {
 
     public static List<Device> loadDevices(int userId) {
         List<Device> devices = new ArrayList<>();
-
         String sql = "SELECT * FROM devices WHERE user_id = ?";
-
         try (Connection conn = DriverManager.getConnection(DB_URL, USERNAME, PASSWORD);
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
@@ -217,7 +251,7 @@ public class DbOps {
      */
     public static List<User> getAllUsers() {
         List<User> users = new ArrayList<>();
-        String sql = "SELECT username, email FROM users"; // prep Query
+        String sql = "SELECT id, username, email, profile_pic FROM users"; // prep Query
 
         try (Connection conn = DriverManager.getConnection(DB_URL, USERNAME, PASSWORD); // after establishing the connection.
              PreparedStatement prepStat = conn.prepareStatement(sql); // select the user

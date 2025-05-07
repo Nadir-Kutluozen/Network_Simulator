@@ -7,6 +7,7 @@ public class User {
     private int id;
     private String username;
     private String email;
+    private byte[] profilePic;
 
     // if a user may want to change the password because, they forget the password!
     private String password;
@@ -17,16 +18,22 @@ public class User {
      * @param username name of the user.
      * @param email email of the user.
      */
-    public User(int id, String username, String email) {
+    public User(int id, String username, String email,byte[] profilePic) {
         this.id = id;
         this.username = username;
         this.email = email;
+        this.profilePic = profilePic;
     }
 
+    /**
+     *
+     */
     public User() {
         this.id = 00;
         this.username = "name";
         this.email = "@mail";
+        this.profilePic = null;
+        
     }
 
     /**
@@ -36,6 +43,21 @@ public class User {
         return id;
     }
 
+    /**
+     *
+     * @return
+     */
+    public byte[] getProfilePic() {
+        return profilePic;
+    }
+
+    /**
+     *
+     * @param profilePic
+     */
+    public void setProfilePic(byte[] profilePic) {
+        this.profilePic = profilePic;
+    }
     /**
      *
      * @return username of the User object.
@@ -52,11 +74,20 @@ public class User {
         return email;
     }
 
+    /**
+     *
+     * @param username
+     */
     public void setUsername(String username) {
         this.username = username;
     }
 
+    /**
+     *
+     * @param email
+     */
     public void setEmail(String email) {
         this.email = email;
     }
+
 }

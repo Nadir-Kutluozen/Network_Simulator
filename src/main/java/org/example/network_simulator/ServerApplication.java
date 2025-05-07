@@ -6,8 +6,13 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.example.network_simulator.db.DbOps;
+import org.example.network_simulator.models.Session;
+import org.example.network_simulator.models.User;
 
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Objects;
 
 public class ServerApplication extends Application {
@@ -38,6 +43,20 @@ public class ServerApplication extends Application {
         // you can also register!!
         DbOps dbOps = new DbOps();
         dbOps.initializeDatabase();
+
+        try {
+            Path imagePath = Paths.get("src/main/resources/org/example/network_simulator/Images/profile.png");
+            byte[] imageBytes = Files.readAllBytes(imagePath);
+            User currentUser = Session.getUser();
+
+            if (currentUser != null) {
+                boolean success = DbOps.updateProfilePic(currentUser.getId(), imageBytes);
+                System.out.println("Profile pic updated? " + success);
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         launch();
 
