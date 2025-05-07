@@ -60,7 +60,7 @@
 /* Header text */
 .table-view .column-header .label {
     -fx-text-fill: white;
-    -fx-font-size: 16px;
+    -fx-font-size: 20px;
     -fx-font-weight: bold;
 }
 
@@ -84,7 +84,7 @@
 /* Cell text */
 .table-view .table-cell {
     -fx-text-fill: white;
-    -fx-font-size: 14px;
+    -fx-font-size: 18px;
     -fx-alignment: CENTER_LEFT;
 }
 
