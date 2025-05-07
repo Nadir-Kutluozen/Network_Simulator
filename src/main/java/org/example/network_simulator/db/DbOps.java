@@ -209,6 +209,35 @@ public class DbOps {
         return devices;
     }
 
+    // we need to gather all the user in the table to display, so later people can access and talk to them
+
+    /**
+     *
+     * @return list of user to display in table view
+     */
+    public static List<User> getAllUsers() {
+        List<User> users = new ArrayList<>();
+        String sql = "SELECT username, email FROM users"; // prep Query
+
+        try (Connection conn = DriverManager.getConnection(DB_URL, USERNAME, PASSWORD); // after establishing the connection.
+             PreparedStatement prepStat = conn.prepareStatement(sql); // select the user
+             ResultSet rs = prepStat.executeQuery()) {
+
+            while (rs.next()) {
+                User user = new User();
+                user.setUsername(rs.getString("username"));
+                user.setEmail(rs.getString("email"));
+                users.add(user);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return users; // return the l;ist of user!!
+    }
+
+
 
 
 }

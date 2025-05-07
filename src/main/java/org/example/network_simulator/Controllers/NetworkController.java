@@ -19,6 +19,7 @@ import javafx.stage.Stage;
 import org.example.network_simulator.Connection;
 import org.example.network_simulator.DragAndDrop.PC;
 import org.example.network_simulator.NetworkDevice;
+import org.example.network_simulator.ServerApplication;
 import org.example.network_simulator.db.DbOps;
 import org.example.network_simulator.models.Device;
 import org.example.network_simulator.models.Session;
@@ -314,4 +315,10 @@ public class NetworkController {
                 .map(d -> (PC) d)
                 .forEach(PC::shutdown);
     }
+
+    @FXML
+    public void goToMedia() throws IOException {
+        ServerApplication.setRoot("users-view.fxml");
+    }
+
 }

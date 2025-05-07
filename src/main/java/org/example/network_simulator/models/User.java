@@ -23,6 +23,12 @@ public class User {
         this.email = email;
     }
 
+    public User() {
+        this.id = 00;
+        this.username = "name";
+        this.email = "@mail";
+    }
+
     /**
      * @return id of the User Object.
      */
@@ -44,5 +50,13 @@ public class User {
      */
     public String getEmail() {
         return email;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }
