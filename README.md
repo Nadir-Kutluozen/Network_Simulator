@@ -5,6 +5,11 @@ Network events are animated in real-time and logged into a database for persiste
 
 ## Features
 * Login/signup pages: Create a user and sign in or if you already have a login you can log on.
+
+![image (5)](https://github.com/user-attachments/assets/2df37349-de61-4309-b0c3-291ce6e8ea6f)
+
+
+
 * Drag-and-Drop Interface:Easily add PC nodes to the canvas.
 * Network Topology: Connect and disconnect nodes to simulate network links.
 * Simulated Terminal: Interact with each PC using commands (e.g., ping).
