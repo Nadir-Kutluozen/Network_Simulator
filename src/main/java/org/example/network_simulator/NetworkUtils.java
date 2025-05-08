@@ -1,7 +1,12 @@
 package org.example.network_simulator;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.util.Duration;
+import org.example.network_simulator.Controllers.NetworkController;
 import org.example.network_simulator.DragAndDrop.PC;
 import org.example.network_simulator.DragAndDrop.Server;
 import org.example.network_simulator.DragAndDrop.Switch;
@@ -56,6 +61,43 @@ public class NetworkUtils {
     }
 
     public static void handlePing(PC source, PC target, TerminalController terminal) {
+        NetworkController controller = terminal.getNetworkController(); // this must be set properly
+
+        terminal.displayOutput("\nPinging " + target + " [" + target.getIpAddress() + "] with 32 bytes of data:");
+
+        for (int i = 0; i < 4; i++) {
+            int delay = i * 500; // stagger each ping
+            Timeline timeline = new Timeline(new KeyFrame(Duration.millis(delay), ev -> {
+
+                // Animate the outbound ping (blue)
+                controller.animatePacket(source, target, Color.DEEPSKYBLUE, () -> {
+                    try {
+                        source.sendMessage(target.getIpAddress(), target.getPort(), "ping");
+
+                        // Simulate random ping time
+                        int time = 1 + new Random().nextInt(10);
+                        terminal.displayOutput("Reply from " + target.getIpAddress() + ": bytes=32 time=" + time + "ms TTL=128");
+
+                        // Animate the reply (green)
+                        controller.animatePacket(target, source, Color.LIMEGREEN, null);
+
+                    } catch (Exception e) {
+                        terminal.displayOutput("Request timed out.");
+
+                        // Animate the failed reply (red)
+                        controller.animatePacket(target, source, Color.CRIMSON, null);
+                    }
+                });
+
+            }));
+            timeline.play();
+        }
+    }
+
+
+
+    /*
+    public static void handlePing(PC source, PC target, TerminalController terminal) {
         terminal.displayOutput("\nPinging " + target + " [" + target.getIpAddress() + "] with 32 bytes of data:");
         for (int i = 0; i < 4; i++) {
             try {
@@ -66,4 +108,5 @@ public class NetworkUtils {
             }
         }
     }
+    */
 }

@@ -22,6 +22,11 @@ public class TerminalController {
         sendButton.setOnAction(event -> handleInput());
     }
 
+    public NetworkController getNetworkController() {
+        return this.networkController;
+    }
+
+
     //todo figure out the stored the information (x,y)
     private void handleInput() {
         String input = inputField.getText().trim();

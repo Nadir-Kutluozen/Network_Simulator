@@ -8,6 +8,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tooltip;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
 import javafx.scene.layout.AnchorPane;
@@ -18,6 +19,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.example.network_simulator.Connection;
 import org.example.network_simulator.DragAndDrop.PC;
+import org.example.network_simulator.DragAndDrop.Server;
 import org.example.network_simulator.NetworkDevice;
 import org.example.network_simulator.ServerApplication;
 import org.example.network_simulator.db.DbOps;
@@ -25,7 +27,9 @@ import org.example.network_simulator.models.Device;
 import org.example.network_simulator.models.Session;
 import org.example.network_simulator.models.User;
 import org.example.network_simulator.NetworkUtils;
-
+import javafx.animation.TranslateTransition;
+import javafx.scene.shape.Circle;
+import javafx.util.Duration;
 import java.io.IOException;
 import java.util.*;
 
@@ -56,15 +60,19 @@ public class NetworkController {
                 NetworkDevice newDevice;
                 if ("PC".equalsIgnoreCase(device.getType())) {
                     PC pc = new PC(device.getX(), device.getY());
-
-                    // Set the saved IP & Port
                     pc.setIpAddress(device.getIpAddress());
                     pc.setPort(device.getPort());
-
                     newDevice = pc;
+                } else if ("Server".equalsIgnoreCase(device.getType())) {
+                    Server server = new Server(device.getX(), device.getY());
+                    server.setIpAddress(device.getIpAddress());
+                    server.setPort(device.getPort());
+                    server.startServer(); // important to listen
+                    newDevice = server;
                 } else {
                     newDevice = NetworkUtils.createDevice(device.getType(), device.getX(), device.getY());
                 }
+
                 addDeviceToPane(newDevice.getType(), newDevice.getXPosition(), newDevice.getYPosition());
 
                 addDevice(newDevice);
@@ -168,25 +176,73 @@ public class NetworkController {
     }
 
     private void addDeviceToPane(String type, double x, double y) {
+        final Delta dragDelta = new Delta();
         NetworkDevice device = NetworkUtils.createDevice(type, x, y);
         if (device == null) return;
+
+        // Assign IP/Port and start server if it's a PC or Server
+        if (device instanceof PC pc) {
+            // Set IP and port manually (replace these with your static counters if needed)
+            pc.setIpAddress("192.168.1." + new Random().nextInt(100) + 100); // avoid duplicates if not saved
+            pc.setPort(6000 + new Random().nextInt(1000));                   // range: 6000–6999
+            pc.startServer();
+        }
 
         ImageView icon = NetworkUtils.createDeviceIcon(type, palette);
         if (icon == null) return;
 
         icon.setLayoutX(x - 25);
         icon.setLayoutY(y - 25);
-        icon.setOnMouseClicked(event -> {
-            if (event.getClickCount() == 2 && device instanceof PC) {
-                openTerminal((PC) device);
-            } else {
-                handleDeviceClick(icon, device);
+
+        Tooltip tooltip = new Tooltip();
+        tooltip.setShowDelay(Duration.millis(200));
+        tooltip.setHideDelay(Duration.millis(100));
+
+        // Compose the tooltip text
+        StringBuilder tooltipText = new StringBuilder();
+        tooltipText.append("Name: ").append(device.getName()).append("\n");
+
+        if (device instanceof PC pc) {
+            tooltipText.append("IP: ").append(pc.getIpAddress()).append("\n");
+            tooltipText.append("Port: ").append(pc.getPort());
+        }
+
+        tooltip.setText(tooltipText.toString());
+        Tooltip.install(icon, tooltip);
+
+
+        icon.setOnMousePressed(event -> {
+            dragDelta.x = event.getX();
+            dragDelta.y = event.getY();
+            icon.toFront();
+        });
+
+        icon.setOnMouseDragged(event -> {
+            icon.setLayoutX(event.getSceneX() - dragDelta.x - networkPane.getLayoutX());
+            icon.setLayoutY(event.getSceneY() - dragDelta.y - networkPane.getLayoutY());
+
+            device.setXPosition(icon.getLayoutX());
+            device.setYPosition(icon.getLayoutY());
+        });
+
+        icon.setOnMouseReleased(event -> {
+            if (event.isStillSincePress()) {
+                if (event.getClickCount() == 2 && device instanceof PC) {
+                    openTerminal((PC) device);
+                } else {
+                    handleDeviceClick(icon, device);
+                }
             }
         });
+
 
         networkPane.getChildren().add(icon);
         addDevice(device);
     }
+
+
+
+
 
     private void handleDeviceClick(Node clickedNode, NetworkDevice clickedDevice) {
         if (!isConnecting) {
@@ -285,6 +341,29 @@ public class NetworkController {
         }).findFirst();
     }
 
+    public void animatePacket(NetworkDevice from, NetworkDevice to, Color color, Runnable onArrival) {
+        Circle packet = new Circle(6, color);
+        networkPane.getChildren().add(packet);
+
+        double startX = from.getXPosition();
+        double startY = from.getYPosition();
+        double endX = to.getXPosition();
+        double endY = to.getYPosition();
+
+        packet.setLayoutX(startX);
+        packet.setLayoutY(startY);
+
+        TranslateTransition transition = new TranslateTransition(Duration.seconds(1), packet);
+        transition.setToX(endX - startX);
+        transition.setToY(endY - startY);
+        transition.setOnFinished(e -> {
+            networkPane.getChildren().remove(packet);
+            if (onArrival != null) onArrival.run();
+        });
+        transition.play();
+    }
+
+
     public void registerTerminal(PC pc, TerminalController controller) {
         openTerminals.put(pc, controller);
     }
@@ -322,3 +401,9 @@ public class NetworkController {
     }
 
 }
+
+class Delta {
+    double x, y;
+}
+
+
