@@ -7,14 +7,26 @@ Network events are animated in real-time and logged into a database for persiste
 * Login/signup pages: Create a user and sign in or if you already have a login you can log on.
 
 ![image (5)](https://github.com/user-attachments/assets/2df37349-de61-4309-b0c3-291ce6e8ea6f)
+![image (6)](https://github.com/user-attachments/assets/4519d354-3519-4b87-a012-0a1f78bf48f6)
+
 
 
 
 * Drag-and-Drop Interface:Easily add PC nodes to the canvas.
+
+
+![image (3)](https://github.com/user-attachments/assets/fa537810-0a9f-47b2-a449-b60376e38381)
+
+
+
 * Network Topology: Connect and disconnect nodes to simulate network links.
 * Simulated Terminal: Interact with each PC using commands (e.g., ping).
 * Animation & Simulation: Visualize packet transfers, delays, and network behavior.
 * Database Logging: Save and review network configurations and activity logs.
+
+
+![IMG_7324](https://github.com/user-attachments/assets/b059abc5-e923-4b56-8285-339b76c759b1)
+
 
 ## Getting Started
 **Prerequisites**
