@@ -24,13 +24,14 @@ Network events are animated in real-time and logged into a database for persiste
 * Animation & Simulation: Visualize packet transfers, delays, and network behavior.
 * Database Logging: Save and review network configurations and activity logs.
 
+** Quick Preview of what to expect! **
 
 ![IMG_7324](https://github.com/user-attachments/assets/b059abc5-e923-4b56-8285-339b76c759b1)
 
 
 ## Getting Started
 **Prerequisites**
-* JDK  or later
+* JDK 23 or later
 * JavaFX SDK
 * IntelliJ IDEA
 ## Installation
@@ -45,6 +46,10 @@ Connect PCs: Draw lines between nodes to simulate network cables.
 Open Terminal: Click a PC to open its terminal and execute network commands like ping.
 Review Logs: Check the database for persisted network configurations and command logs.
 
+**Refer Below for more information**  
+
 ## HiFi Figma design
 https://www.figma.com/design/OzJOgn6NxJcVrlneKyfGwq/PC-network?node-id=0-1&p=f&t=4SM8SOIniJQ8q1r2-0
+
+//TODO add video quick demo please!
 
