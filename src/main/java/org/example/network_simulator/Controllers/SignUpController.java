@@ -49,8 +49,8 @@ public class SignUpController {
         boolean success = DbOps.registerUser(username, email, password);
 
         if (success) {
-            showAlert(Alert.AlertType.INFORMATION, "Registration Successful", "You can now log in.");
-            ServerApplication.setRoot("login-view.fxml");
+            showAlert(Alert.AlertType.INFORMATION, "Registration Successful", "Lets change your Profile pick!");
+            ServerApplication.setRoot("profile-pick.fxml"); // add this to log in page profile page too
         } else {
             showAlert(Alert.AlertType.ERROR, "Registration Failed", "That email is already registered. Try using a different email.");
         }

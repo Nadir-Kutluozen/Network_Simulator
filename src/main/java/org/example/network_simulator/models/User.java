@@ -36,6 +36,12 @@ public class User {
         
     }
 
+    public User(int userId, String username, String email) {
+        this.id = id;
+        this.username = username;
+        this.email = email;
+    }
+
     /**
      * @return id of the User Object.
      */

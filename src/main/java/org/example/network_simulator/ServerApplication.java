@@ -44,19 +44,7 @@ public class ServerApplication extends Application {
         DbOps dbOps = new DbOps();
         dbOps.initializeDatabase();
 
-        try {
-            Path imagePath = Paths.get("src/main/resources/org/example/network_simulator/Images/profile.png");
-            byte[] imageBytes = Files.readAllBytes(imagePath);
-            User currentUser = Session.getUser();
 
-            if (currentUser != null) {
-                boolean success = DbOps.updateProfilePic(currentUser.getId(), imageBytes);
-                System.out.println("Profile pic updated? " + success);
-            }
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
 
         launch();
 

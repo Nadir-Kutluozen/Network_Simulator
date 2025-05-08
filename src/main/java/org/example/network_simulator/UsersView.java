@@ -28,17 +28,26 @@ public class UsersView {
         usernameColumn.setCellValueFactory(new PropertyValueFactory<>("username"));
         emailColumn.setCellValueFactory(new PropertyValueFactory<>("email"));
 
-        loadUsers();// Load users
+        loadUsers(); // Load users
+
         User currentUser = Session.getUser();
 
-        if (currentUser != null && currentUser.getProfilePic() != null) {
-            byte[] picBytes = currentUser.getProfilePic();
-            javafx.scene.image.Image image = new javafx.scene.image.Image(new java.io.ByteArrayInputStream(picBytes)); // set the image!
-            profilePick.setImage(image);
-        } else {
-            profilePick.setImage(null);
+        if (currentUser != null) {
+            byte[] picBytes = DbOps.getProfilePicById(currentUser.getId());
+
+            if (picBytes != null) {
+                javafx.scene.image.Image image = new javafx.scene.image.Image(new java.io.ByteArrayInputStream(picBytes));
+                profilePick.setImage(image);
+
+                //Update session user too
+                currentUser.setProfilePic(picBytes);
+            } else {
+                System.out.println("there was no pick!");
+                profilePick.setImage(null); // fallback if no pic
+            }
         }
     }
+
 
     private void loadUsers() {
         List<User> users = DbOps.getAllUsers();

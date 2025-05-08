@@ -19,12 +19,12 @@
                         <ImageView fx:id="image" fitHeight="199.0" fitWidth="200.0" layoutX="6.0" layoutY="-10.0" pickOnBounds="true" preserveRatio="true" />
                      </children>
                   </Pane>
-                  <Button fx:id="continueBtn" alignment="CENTER" layoutX="418.0" layoutY="419.0" mnemonicParsing="false" style="-fx-background-color: none; -fx-background-radius: 25; -fx-border-radius: 25; -fx-border-color: black;" text="Continue" textAlignment="CENTER">
+                  <Button fx:id="continueBtn" onAction="#onContinueClick" alignment="CENTER" layoutX="418.0" layoutY="419.0" mnemonicParsing="false" style="-fx-background-color: none; -fx-background-radius: 25; -fx-border-radius: 25; -fx-border-color: black;" text="Continue" textAlignment="CENTER">
                      <font>
                         <Font name="Arial" size="20.0" />
                      </font>
                   </Button>
-                  <Button fx:id="editPhotoBtn" alignment="CENTER" layoutX="412.0" layoutY="354.0" mnemonicParsing="false" style="-fx-background-color: none; -fx-background-radius: 25; -fx-border-radius: 25; -fx-border-color: black;" text="Edit Photo" textAlignment="CENTER">
+                  <Button fx:id="editPhotoBtn"  alignment="CENTER" layoutX="412.0" layoutY="354.0" mnemonicParsing="false" style="-fx-background-color: none; -fx-background-radius: 25; -fx-border-radius: 25; -fx-border-color: black;" text="Edit Photo" textAlignment="CENTER">
                      <font>
                         <Font name="Arial" size="20.0" />
                      </font>

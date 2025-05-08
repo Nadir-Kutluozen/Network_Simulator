@@ -3,6 +3,7 @@ package org.example.network_simulator.db;
 import org.example.network_simulator.DragAndDrop.PC;
 import org.example.network_simulator.NetworkDevice;
 import org.example.network_simulator.models.Device;
+import org.example.network_simulator.models.Session;
 import org.example.network_simulator.models.User;
 
 import java.sql.*;
@@ -75,31 +76,47 @@ public class DbOps {
 
 
     // Register a new user
-
     /**
-     * save the user to the database
+     * Save the user to the database and create a session.
+     *
      * @param username username
-     * @param email email
+     * @param email    email
      * @param password password
-     * @return ture is the save was successful
+     * @return true if the save was successful and session set
      */
     public static boolean registerUser(String username, String email, String password) {
         String sql = "INSERT INTO users (username, email, password) VALUES (?, ?, ?)";
         try (Connection conn = DriverManager.getConnection(DB_URL, USERNAME, PASSWORD);
-             PreparedStatement prepStat = conn.prepareStatement(sql)) {
+             PreparedStatement prepStat = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
             prepStat.setString(1, username);
             prepStat.setString(2, email);
             // todo - hash this later.
             prepStat.setString(3, password);
 
-            prepStat.executeUpdate();
-            return true;
+            int rowsAffected = prepStat.executeUpdate();
+
+            if (rowsAffected > 0) {
+                try (ResultSet generatedKeys = prepStat.getGeneratedKeys()) {
+                    if (generatedKeys.next()) {
+                        int userId = generatedKeys.getInt(1);
+
+                        User newUser = new User(userId, username, email);
+                        Session.setUser(newUser);
+
+                        System.out.println("User registered and session set: " + newUser.getUsername());
+                        return true;
+                    }
+                }
+            }
+            return false;
+
         } catch (SQLException e) {
             System.err.println("Registration failed: " + e.getMessage());
             return false;
         }
     }
+
 
     /**
      * Update the profile picture for a specific user by their ID.
@@ -125,6 +142,7 @@ public class DbOps {
             return false;
         }
     }
+
 
 
 
@@ -163,6 +181,29 @@ public class DbOps {
 
         return null;
     }
+
+    /**
+     *
+     * @param userId
+     * @return
+     */
+    public static byte[] getProfilePicById(int userId) {
+        String sql = "SELECT profile_pic FROM users WHERE id = ?";
+        try (
+                Connection conn = DriverManager.getConnection(DB_URL, USERNAME, PASSWORD);
+                PreparedStatement stmt = conn.prepareStatement(sql)
+        ) {
+            stmt.setInt(1, userId);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return rs.getBytes("profile_pic");
+            }
+        } catch (SQLException e) {
+            System.err.println("Failed to fetch profile picture: " + e.getMessage());
+        }
+        return null;
+    }
+
 
     /**
      * Save the current device usage to the database

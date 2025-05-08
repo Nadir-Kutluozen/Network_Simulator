@@ -117,7 +117,7 @@
             <Cursor fx:constant="OPEN_HAND" />
          </cursor>
          <children>
-            <Button fx:id="media" layoutX="593.0" layoutY="14.0" mnemonicParsing="false" onAction="#goToMedia" text="Media" textFill="#101010" AnchorPane.rightAnchor="10.0">
+            <Button fx:id="media" layoutX="593.0" layoutY="14.0" mnemonicParsing="false" onAction="#goToMedia" style="-fx-background-color: gray; -fx-background-radius: 25;" text="Media" textFill="WHITE" AnchorPane.rightAnchor="10.0">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font>
