@@ -2,8 +2,10 @@
 
 *JavaFX Network Simulator* is a desktop application that lets users build and simulate computer networks with a drag-and-drop interface. Create PC nodes, connect them with virtual cables, and execute basic commands like ping via an integrated terminal.
 Network events are animated in real-time and logged into a database for persistence.
+
 ## Features
-* **Drag-and-Drop Interface:** Easily add PC nodes to the canvas.
+* Login/signup pages: Create a user and sign in or if you already have a login you can log on.
+* Drag-and-Drop Interface:Easily add PC nodes to the canvas.
 * Network Topology: Connect and disconnect nodes to simulate network links.
 * Simulated Terminal: Interact with each PC using commands (e.g., ping).
 * Animation & Simulation: Visualize packet transfers, delays, and network behavior.
