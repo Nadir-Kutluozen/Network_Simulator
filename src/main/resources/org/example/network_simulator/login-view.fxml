@@ -31,7 +31,7 @@
             <DropShadow offsetY="10.0" />
          </effect>
       </ImageView>
-      <Button fx:id="signInButton" alignment="CENTER" contentDisplay="CENTER" layoutX="431.0" layoutY="366.0" mnemonicParsing="false" onAction="#onSignInClick" style="-fx-background-color: linear-gradient(to top, lightgreen, cadetblue); -fx-border-radius: 100; -fx-border-image-width: 2; -fx-border-color: black; -fx-background-radius: 100;" text="Sign In" textFill="WHITE">
+      <Button fx:id="signInButton" alignment="CENTER" contentDisplay="CENTER" layoutX="431.0" layoutY="366.0" mnemonicParsing="false" onAction="#onSignInClick" style="-fx-background-color: linear-gradient(to top, green, dodgerblue); -fx-border-radius: 100; -fx-border-image-width: 2; -fx-border-color: black; -fx-background-radius: 100;" text="Sign In" textFill="WHITE">
          <font>
             <Font name="IBM Plex Sans Arabic SmBld" size="18.0" />
          </font>
@@ -44,7 +44,7 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Text>
-      <Button fx:id="signUpButton" alignment="CENTER" contentDisplay="CENTER" layoutX="430.0" layoutY="460.0" mnemonicParsing="false" onAction="#onSignUpClick" style="-fx-background-color: linear-gradient(to top, lightgreen, cadetblue); -fx-border-radius: 100; -fx-border-image-width: 2; -fx-border-color: black; -fx-background-radius: 100;" text="Sign Up" textFill="WHITE">
+      <Button fx:id="signUpButton" alignment="CENTER" contentDisplay="CENTER" layoutX="430.0" layoutY="460.0" mnemonicParsing="false" onAction="#onSignUpClick" style="-fx-background-color: linear-gradient(to top, green, dodgerblue); -fx-border-radius: 100; -fx-border-image-width: 2; -fx-border-color: black; -fx-background-radius: 100;" text="Sign Up" textFill="WHITE">
          <font>
             <Font name="IBM Plex Sans Arabic SmBld" size="18.0" />
          </font>
