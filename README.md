@@ -51,5 +51,7 @@ Review Logs: Check the database for persisted network configurations and command
 ## HiFi Figma design
 https://www.figma.com/design/OzJOgn6NxJcVrlneKyfGwq/PC-network?node-id=0-1&p=f&t=4SM8SOIniJQ8q1r2-0
 
-//TODO add video quick demo please!
+## Live Demo
+Check out the demo video on [YouTube](https://youtu.be/nizpUmn8_68).
+
 
