@@ -6,21 +6,25 @@ import org.example.network_simulator.models.Device;
 import org.example.network_simulator.models.Session;
 import org.example.network_simulator.models.User;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 public class DbOps {
-    private static final String DB_URL = "jdbc:mysql://networksimulator.mysql.database.azure.com:3306/network_db?useSSL=true&requireSSL=true";
-    private static final String USERNAME = "nadirkutluozen";  // Azure requires full username
-    private static final String PASSWORD = "1234811llA!";
+    private static final Properties PROPS = loadDbProperties();
+    private static final String DB_URL = PROPS.getProperty("db.url");
+    private static final String USERNAME = PROPS.getProperty("db.username");// Azure requires full username
+    private static final String PASSWORD = PROPS.getProperty("db.username");
 
     // todo - organize this!!
     public void initializeDatabase() {
-        String serverUrl = "jdbc:mysql://networksimulator.mysql.database.azure.com:3306/?useSSL=true&requireSSL=true";
-        String fullDbUrl = "jdbc:mysql://networksimulator.mysql.database.azure.com:3306/network_db?useSSL=true&requireSSL=true";
-        String username = "nadirkutluozen";
-        String password = "1234811llA!";
+        String serverUrl = PROPS.getProperty("db.serverUrl");
+        String fullDbUrl = PROPS.getProperty("db.url");
+        String username = PROPS.getProperty("db.username");
+        String password = PROPS.getProperty("db.username");
 
         try (
                 // Connect to server (no DB here)
@@ -74,8 +78,8 @@ public class DbOps {
     }
 
 
-
     // Register a new user
+
     /**
      * Save the user to the database and create a session.
      *
@@ -144,13 +148,10 @@ public class DbOps {
     }
 
 
-
-
-
     /**
      * Authenticate the user by using a specific query.
      *
-     * @param username username
+     * @param username      username
      * @param passwordInput password
      * @return Specific user object for session usage.
      */
@@ -169,7 +170,7 @@ public class DbOps {
                 byte[] profilePic = rs.getBytes("profile_pic"); // to set the profile pick
 
                 // Create the User object
-                User user = new User(id, username, email,profilePic);
+                User user = new User(id, username, email, profilePic);
 
                 // Set the profile pic
                 user.setProfilePic(profilePic);
@@ -183,7 +184,6 @@ public class DbOps {
     }
 
     /**
-     *
      * @param userId
      * @return
      */
@@ -208,7 +208,8 @@ public class DbOps {
     /**
      * Save the current device usage to the database
      * for the specific user.
-     * @param userId specific user
+     *
+     * @param userId  specific user
      * @param devices have the device
      */
     public static void saveDevices(int userId, List<NetworkDevice> devices) {
@@ -287,7 +288,6 @@ public class DbOps {
     // we need to gather all the user in the table to display, so later people can access and talk to them
 
     /**
-     *
      * @return list of user to display in table view
      */
     public static List<User> getAllUsers() {
@@ -312,6 +312,15 @@ public class DbOps {
         return users; // return the l;ist of user!!
     }
 
+    private static Properties loadDbProperties() {
+        Properties props = new Properties();
+        try (InputStream input = DbOps.class.getClassLoader().getResourceAsStream("db.properties")) {
+            props.load(input);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return props;
+    }
 
 
 
