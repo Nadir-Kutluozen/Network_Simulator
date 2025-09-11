@@ -20,7 +20,7 @@
       <children>
             <ImageView fitHeight="570.0" fitWidth="500.0" pickOnBounds="true">
                <image>
-                  <Image url="@board.png" />
+                  <Image url="@Images/board.png" />
                </image>
             </ImageView>
         <Circle id="pc1" centerX="100.0" centerY="100.0" fill="#0000FF" radius="20.0" />

@@ -5,8 +5,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import org.example.network_simulator.db.DbOps;
+import org.example.network_simulator.models.Session;
+import org.example.network_simulator.models.User;
 
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Objects;
 
 public class ServerApplication extends Application {
@@ -21,7 +27,7 @@ public class ServerApplication extends Application {
         stage.show();
     }
 
-    static void setRoot(String fxml) throws IOException {
+    public static void setRoot(String fxml) throws IOException {
         scene.setRoot(loadFXML(fxml));
     }
 
@@ -31,6 +37,16 @@ public class ServerApplication extends Application {
     }
 
     public static void main(String[] args) {
+        //TODO, to launch test this!!
+        //test email:Nadir
+        //test password:1234567
+        // you can also register!!
+        DbOps dbOps = new DbOps();
+        dbOps.initializeDatabase();
+
+
+
         launch();
+
     }
 }
